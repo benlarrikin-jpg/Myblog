@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ post.title }}</title>
+</head>
+<body>
+    <h1>{{ post.title }}</h1>
+    <p><strong>By:</strong> {{ post.author }} | {{ post.created_on }}</p>
+    <div>
+        <p>{{ post.body }}</p>
+    </div>
+    
+    <hr>
+    <h3>Comments ({{ comments.count }})</h3>
+
+    {% for comment in comments %}
+        <div>
+            <p><strong>{{ comment.name }}</strong> ({{ comment.created_on|date:"M d, Y H:i" }})</p>
+            <p>{{ comment.body }}</p>
+        </div>
+        <hr>
+    {% empty %}
+        <p>No comments yet. Be the first to contribute!</p>
+    {% endfor %}
+
+    <h3>Leave a Comment</h3>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Post Comment</button>
+    </form>
+    
+    <a href="{% url 'blog_list' %}">← Back to Blog</a>
+</body>
+</html>
