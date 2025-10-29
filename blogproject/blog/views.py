@@ -18,7 +18,7 @@ def blog_detail(request, slug):
             new_comment = form.save(commit=False)
             new_comment.post = post
             new_comment.save()
-            return redirect('blog_detail', slug=comments.post.slug)
+            return redirect('blog_detail', slug=post.slug)
     else:
         form = CommentForm()
 
