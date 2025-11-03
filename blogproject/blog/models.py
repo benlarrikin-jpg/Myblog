@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 from django.utils import timezone
 from django.utils.text import slugify
 
@@ -8,6 +9,7 @@ class Post(models.Model):
     title = models.CharField(max_length=200)
     author = models.CharField(max_length=100)
     body = models.TextField()
+    picture = models.ImageField(upload_to='post_pics/', null=True, blank=True)
     created_on = models.DateTimeField(default=timezone.now)
     slug = models.SlugField(unique=True, blank=True)
 
@@ -16,6 +18,7 @@ class Comment(models.Model):
     name = models.CharField(max_length=80)
     email = models.EmailField()
     body = models.TextField()
+    picture = models.ImageField(upload_to='comment_pics/', null=True, blank=True)
     created_on = models.DateTimeField(default=timezone.now)
 
     def save(self, *args, **kwargs):
