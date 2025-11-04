@@ -13,8 +13,9 @@
             </h2>
             <p><strong>By:</strong> {{ post.author }} | {{ post.created_on }}</p>
             <p>{{ post.body|truncatewords:30 }}</p>
-            
-            <form method="POST" enctype="multipart/form-data">
+            {% if post.picture %}
+                    <img src="{{ post.picture.url }}" alt="{{ post.name }}" width="150">
+                {% endif %}
         </div>
         <hr>
     {% endfor %}

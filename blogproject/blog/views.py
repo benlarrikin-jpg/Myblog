@@ -14,8 +14,8 @@ def blog_list(request):
 def blog_detail(request, slug):
     post = get_object_or_404(Post, slug=slug)
     comments = post.comments.all().order_by('-created_on')
+    
     request.method == 'POST'
-
     form = CommentForm(request.POST)
     if form.is_valid():
             new_comment = form.save(commit=False)

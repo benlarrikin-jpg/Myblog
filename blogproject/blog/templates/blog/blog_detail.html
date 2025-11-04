@@ -18,6 +18,9 @@
         <div>
             <p><strong>{{ comment.name }}</strong> ({{ comment.created_on|date:"M d, Y H:i" }})</p>
             <p>{{ comment.body }}</p>
+            {% if comment.picture %}
+                    <img src="{{ comment.picture.url }}" alt="{{ comment.name }}" width="150">
+                {% endif %}
         </div>
         <hr>
     {% empty %}
@@ -25,12 +28,14 @@
     {% endfor %}
 
     <h3>Leave a Comment</h3>
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Post Comment</button>
     </form>
     
     <a href="{% url 'emeka' %}">← Back to Blog</a>
+    <img src="{{ comment.image.url }}" alt="{{ comment.title }}">
+
 </body>
 </html>
