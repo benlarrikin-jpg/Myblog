@@ -10,8 +10,8 @@
     <div>
         <p>{{ post.body }}</p>
     </div>
-    
     <hr>
+
     <h3>Comments ({{ comments.count }})</h3>
 
     {% for comment in comments %}
@@ -23,6 +23,7 @@
                 {% endif %}
         </div>
         <hr>
+
     {% empty %}
         <p>No comments yet. Be the first to contribute!</p>
     {% endfor %}
@@ -35,7 +36,5 @@
     </form>
     
     <a href="{% url 'emeka' %}">← Back to Blog</a>
-    <img src="{{ comment.image.url }}" alt="{{ comment.title }}">
-
 </body>
 </html>
