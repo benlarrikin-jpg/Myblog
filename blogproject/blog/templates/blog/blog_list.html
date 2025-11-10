@@ -4,20 +4,71 @@
     <meta charset="UTF-8">
     <title>My Blog</title>
 </head>
+
 <body>
-    <h1>Blog Posts</h1>
+    <style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    .navbar {
+        width: 100%;
+        background-color: darkgray;
+        overflow: auto;
+        position: sticky;
+        top: 0;
+    }
+    .navbar a {
+        float: left;
+        padding: 12px;
+        color: blueviolet;
+        text-decoration: none;
+        font-size: 17px;
+        float: left;
+        border-right:1px solid black;
+    }
+    .navbar a:hover {
+        background-color: black;
+    }
+    .active {
+        background-color: yellow;
+    }
+    
+    @media screen and (max-width: 500px) {
+        .navbar a {
+            float: none;
+            display: block;
+        }
+    }
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+    </style>
+    
     {% for post in posts %}
-        <div>
-            <h2>
-                <a href="{% url 'blog_detail' post.slug %}">{{ post.title }}</a>
-            </h2>
-            <p><strong>By:</strong> {{ post.author }} | {{ post.created_on }}</p>
-            <p>{{ post.body|truncatewords:30 }}</p>
-            {% if post.picture %}
-                    <img src="{{ post.picture.url }}" alt="{{ post.name }}" width="150">
-                {% endif %}
+    <div>
+        <div class="navbar">
+            <a href="#"><i class="fa fa-fw fa-home"></i>Home</a>
+            <a href="#"><i class="fa fa-fw fa-gear"></i>Services</a>
+            <a href="#"><i class="fa fa-fw fa-user"></i>Login</a>
+            <a class="active" href="{% url 'emeka' %}"><i class="fa fa-fw fa-book"></i>Blog</a>
+            <ul style="float:right"><a href="#"><i class="fa fa-fw fa-phone"></i>Contact Us</a></ul>
         </div>
+        
+        <h1>Study And Work</h1>
+        
+        <p><strong>By:</strong> {{ post.author }} | {{ post.created_on }}</p>
+        <p>{{ post.body|truncatewords:30 }}</p>
+        
+        {% if post.picture %}
+        <img src="{{ post.picture.url }}" alt="{{ post.name }}" width="280">
+        {% endif %}
+        
+        <h2>
+            <a href="{% url 'blog_detail' post.slug %}">Read more</a>
+        </h2>
         <hr>
-    {% endfor %}
-</body>
-</html>
+        {% endfor %}
+    </body>
+    </html>

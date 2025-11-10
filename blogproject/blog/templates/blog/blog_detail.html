@@ -2,61 +2,114 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{ post.title }}</title>
-    
+    <title>Study And Work</title>
+</head>
+
+<body>
     <style>
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            margin: 20px;
-            line-height: 1;
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    .navbar {
+        width: 100%;
+        background-color: darkgray;
+        overflow: auto;
+        position: sticky;
+        top: 0;
+    }
+    .navbar a {
+        float: left;
+        padding: 12px;
+        color: blueviolet;
+        text-decoration: none;
+        font-size: 17px;
+        float: left;
+        border-right:1px solid black;
+    }
+    .navbar a:hover {
+        background-color: black;
+    }
+    .active {
+        background-color: yellow;
+    }
+    
+    @media screen and (max-width: 500px) {
+        .navbar a {
+            float: none;
+            display: block;
         }
-        h1 {
-            color: red;
-        }
-        .meta {
-            font-size: 2em;
-        }
-        .content {
-            margin-top: 20px;
-        }
-        a {
-            color: green;
-        }
-        </style>
-        </head>
-        
-        <body>
-            <h1>{{ post.title }}</h1>
-            <p class="meta"></p>
-            <p><strong>By:</strong> {{ post.author }} | {{ post.created_on }}</p>
-            
-            <div class="content">
-                <p>{{ post.body }}</p>
-            </div>
-            <hr>
-            
-            <h3>Comments ({{ comments.count }})</h3>
-            {% for comment in comments %}
-            
-            <div>
-                <p><strong>{{ comment.name }}</strong> ({{ comment.created_on|date:"M d, Y H:i" }})</p>
-                <p>{{ comment.body }}</p>
-                {% if comment.picture %}
-                <img src="{{ comment.picture.url }}" alt="{{ comment.name }}" width="150">
-                {% endif %}
-            </div>
-            <hr>
-            
-            {% empty %}
-            <p>No comments yet. Be the first to contribute!</p>
-            {% endfor %}
-            
-            <h3>Leave a Comment</h3>
-            <form method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit">Post Comment</button>
-            </form>
-            <a href="{% url 'emeka' %}">← Back to Blog</a>
+    }
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+    </style>
+    
+    <div>
+        <div class="navbar">
+        <a href="#"><i class="fa fa-fw fa-home"></i>Home</a>
+        <a href="#"><i class="fa fa-fw fa-gear"></i>Services</a>
+        <a href="#"><i class="fa fa-fw fa-user"></i>Login</a>
+        <a class="active" href="{% url 'emeka' %}"><i class="fa fa-fw fa-book"></i>Blog</a>
+        <ul style="float:right"><a href="#"><i class="fa fa-fw fa-phone"></i>Contact Us</a></ul>
+    </div>
+
+    <style>
+    body {
+        font-family: 'Segoe UI', sans-serif;
+        margin: 8px;
+        line-height: 1;
+    }
+    h1 {
+        color: rgb(182, 73, 73);
+    }
+    .meta {
+        font-size: 2em;
+    }
+    .content {
+        margin-top: 20px;
+    }
+    a {
+        color: green;
+    }
+    </style>
+    
+    <h1>Study And Work</h1>
+    <p class="meta"></p>
+    <p><strong>By:</strong> {{ post.author }} | {{ post.created_on }}</p>
+    
+    <div class="content">
+        <p>{{ post.body }}</p>
+        {% if post.picture %}
+        <img src="{{ post.picture.url }}" alt="{{ post.name }}" width="280">
+        {% endif %}
+    </div>
+    <hr>
+    
+    <h3>Comments ({{ comments.count }})</h3>
+    
+    {% for comment in comments %}
+    <div>
+        <p><strong>{{ comment.name }}</strong> ({{ comment.created_on|date:"M d, Y H:i" }})</p>
+        <p>{{ comment.body }}</p>
+        {% if comment.picture %}
+        <img src="{{ comment.picture.url }}" alt="{{ comment.name }}" width="320">
+        {% endif %}
+    </div>
+    <hr>
+    
+    {% empty %}
+    <p>No comments yet. Be the first to contribute!</p>
+    {% endfor %}
+    
+    <h3>Leave a Comment</h3>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Post Comment</button>
+    </form>
+    
+    <a href="{% url 'emeka' %}">← Back to Blog</a>
         </body>
         </html>
